@@ -332,9 +332,15 @@ public:
     // ================== END QUICKSORT ==================//
 
     //starting mergeSort
+    void mergeSortHelper(){
+
+    }
     void mergeSort(){
         if(typeid(data[0]) != typeid(0)){
             throw std::invalid_argument("The list is not int type");
+        }
+        else{
+            mergeSortHelper(); 
         }
     }
 
