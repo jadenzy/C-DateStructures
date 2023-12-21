@@ -331,6 +331,14 @@ public:
      // This also depends on the position of hte pivot 
     // ================== END QUICKSORT ==================//
 
+    //starting mergeSort
+    void mergeSort(){
+        if(typeid(data[0]) != typeid(0)){
+            throw std::invalid_argument("The list is not int type");
+        }
+    }
+
+
     ~ArrayList(){
         delete[] data;
     }
