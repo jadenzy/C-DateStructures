@@ -283,14 +283,14 @@ public:
     private:
     int partition(int start, int end){
         T pivot = data[start]; 
-        int count = 0;
+        int countPivot = 0;
         for(int i = start + 1; i <= end; i++){
             if(data[i] <= pivot){
-                count++; 
+                countPivot++; 
             }
         }
 
-        int pivotIndex = start + count; 
+        int pivotIndex = start + countPivot; 
 
         T temp = data[start];
         data[start] = data[pivotIndex]; 
@@ -331,19 +331,31 @@ public:
      // This also depends on the position of hte pivot 
     // ================== END QUICKSORT ==================//
 
-    //starting mergeSort
-    void mergeSortHelper(){
 
+    ////////////////////
+    //starting mergeSort
+    void merge(){
+        
+    }
+    int mergeSortHelper(){
+        if()
+        int mid = data[(count - 1) / 2]; 
     }
     void mergeSort(){
-        if(typeid(data[0]) != typeid(0)){
+        if(count == 0){
+            throw std::invalid_argument("The list is empty");
+        }
+        else if(typeid(data[0]) != typeid(0)){
             throw std::invalid_argument("The list is not int type");
+        }
+        else if(count == 1){
+            return; 
         }
         else{
             mergeSortHelper(); 
         }
     }
-
+    // ================== END MERGESORT ==================//
 
     ~ArrayList(){
         delete[] data;
