@@ -20,7 +20,7 @@ public:
     ArrayList(int capacity){
         this->capacity = capacity;
         count = 0;
-        data = new int[capacity];
+        data = new T[capacity];
     }
     //function uses to clean not used capacity if element < capacity / 2 
     void CleanMemory(){
@@ -157,7 +157,7 @@ public:
             return data[index];
         }
         else{
-            throw std::invalid_argument("'"+ std::to_string(index) +"' is not a valid index");
+            throw std::invalid_argument("Accessing with ['"+ std::to_string(index) +"'] is not a valid index");
         }
     }
     // equal = operator 
@@ -334,12 +334,55 @@ public:
 
     ////////////////////
     //starting mergeSort
-    void merge(){
+    void merge(int start, int mid, int end){
         
+        int listLeft = mid - start + 1; 
+        int listRight = end - mid; 
+        
+        int* leftTemp = new int[listLeft]; 
+        int* rightTemp = new int[listRight]; 
+         
+        for(int i = 0; i < listLeft; i++){
+            leftTemp[i] = data[start + i]; 
+        }
+        
+        for(int j = 0; j < listRight; j++){
+            rightTemp[j] = data[mid + j + 1]; 
+        }
+        
+        int leftIndex = 0, rightIndex = 0; 
+        int mergeIndex = start; 
+        
+        while(leftIndex < listLeft && rightIndex < listRight){
+            if(leftTemp[leftIndex] <= rightTemp[rightIndex]){
+                data[mergeIndex] = leftTemp[leftIndex];
+                leftIndex++; 
+            }
+            else{
+                data[mergeIndex] = rightTemp[rightIndex]; 
+                rightIndex++; 
+            }
+            mergeIndex++; 
+        }
+       
+        while(leftIndex < listLeft){
+            data[mergeIndex] = leftTemp[leftIndex]; 
+            leftIndex++;
+            mergeIndex++;
+        }
+        while(rightIndex < listRight){
+            data[mergeIndex] = rightTemp[rightIndex]; 
+            rightIndex++;
+            mergeIndex++;
+        }
     }
-    int mergeSortHelper(){
-        if()
-        int mid = data[(count - 1) / 2]; 
+    void mergeSortHelper(int start, int end){
+        if(start >= end)
+            return; 
+        int mid = start + (end - start) / 2; 
+        mergeSortHelper(start, mid); 
+        mergeSortHelper(mid + 1, end); 
+        merge(start, mid, end);
     }
     void mergeSort(){
         if(count == 0){
@@ -349,10 +392,10 @@ public:
             throw std::invalid_argument("The list is not int type");
         }
         else if(count == 1){
-            return; 
+            throw std::invalid_argument("The list contains only one elements");
         }
         else{
-            mergeSortHelper(); 
+            mergeSortHelper(0, count - 1); 
         }
     }
     // ================== END MERGESORT ==================//
